@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Web Compiler</title>
+    
+    <!-- Load PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <a href="/elearning-1.0.0/complier.py"></a>
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        textarea {
+            width: 80%;
+            height: 200px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Python Web Compiler</h1>
+
+    <textarea id="code-editor">print("Hello, World!")</textarea>
+    <br>
+    <button onclick="runPython()">Run Code</button>
+
+    <h2>Output:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        function runPython() {
+            let code = document.getElementById("code-editor").value;
+            let pyscriptTag = document.createElement("py-script");
+            pyscriptTag.innerHTML = `
+                try:
+                    exec("""${code}""")
+                except Exception as e:
+                    print("Error:", e)
+            `;
+            document.getElementById("output").innerHTML = "";
+            document.getElementById("output").appendChild(pyscriptTag);
+        }
+    </script>
+
+</body>
+</html>
